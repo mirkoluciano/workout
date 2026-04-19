@@ -669,3 +669,25 @@ canvas#analogClock {
   25% { text-shadow: -2px 0 var(--cyan), 2px 0 var(--purple); }
   75% { text-shadow: 2px 0 var(--cyan), -2px 0 var(--purple); }
 }
+
+.bandicoot-footer {
+  text-align: center;
+  padding: 4px 0 2px;
+  width: 100%;
+}
+.by-bandicoot {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #FF0097, #7F00FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: skewX(-6deg);
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.bottom-nav { flex-direction: column !important; padding-bottom: env(safe-area-inset-bottom) !important; }
+.bottom-nav > div:first-child { display: flex; width: 100%; }

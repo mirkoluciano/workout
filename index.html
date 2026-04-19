@@ -148,13 +148,9 @@
 
 </div>
 
-<!-- BY BANDICOOT FOOTER -->
-<div class="bandicoot-footer">
-  <span class="by-bandicoot">by BANDICOOT</span>
-</div>
-
 <!-- BOTTOM NAV -->
-<div class="bottom-nav">
+<div class="bottom-nav" style="flex-direction:column;padding-bottom:env(safe-area-inset-bottom);">
+<div style="display:flex;width:100%;">
   <div class="nav-item active" id="nav-workout" onclick="switchView('workout')">
     <div class="nav-icon-txt">W</div>
     <div class="nav-label">WORKOUT</div>
@@ -179,6 +175,10 @@
     <div class="nav-icon-txt">CFG</div>
     <div class="nav-label">CONFIG</div>
   </div>
+</div>
+<div class="bandicoot-footer">
+  <span class="by-bandicoot">by BANDICOOT</span>
+</div>
 </div>
 
 <script src="app.js"></script>
