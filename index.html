@@ -36,34 +36,30 @@ html, body {
   overflow-x: hidden;
 }
 
-/* SCANLINES */
-body::before {
-  content: '';
+/* SCANLINES + GRID via real divs (iOS Safari PWA fix) */
+#scanlines {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 2px,
-    rgba(0,0,0,0.15) 2px,
-    rgba(0,0,0,0.15) 4px
+    rgba(0,0,0,0.18) 2px,
+    rgba(0,0,0,0.18) 4px
   );
   pointer-events: none;
   z-index: 9999;
 }
-
-/* GRID BG */
-body::after {
-  content: '';
+#grid-bg {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 40vh;
+  height: 45vh;
   background:
-    linear-gradient(rgba(255,0,151,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,0,151,0.06) 1px, transparent 1px);
-  background-size: 40px 40px;
-  transform: perspective(400px) rotateX(60deg);
-  transform-origin: bottom;
+    linear-gradient(rgba(255,0,151,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,151,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  transform: perspective(350px) rotateX(55deg);
+  transform-origin: bottom center;
   pointer-events: none;
   z-index: 0;
 }
@@ -508,6 +504,8 @@ canvas#analogClock {
 </style>
 </head>
 <body>
+<div id="scanlines"></div>
+<div id="grid-bg"></div>
 <div id="app">
   <div class="header">
     <div class="logo">MICIULINA</div>
