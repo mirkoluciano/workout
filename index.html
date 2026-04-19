@@ -6,10 +6,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="WORKOUT">
-<title>MICIULINA WORKOUT</title>
+<title>WORKOUT</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- RETRO GRID CANVAS -->
+<canvas id="retro-grid"></canvas>
 
 <div id="app">
 
@@ -17,14 +20,13 @@
   <div class="header">
     <div class="logo" id="logo-name" onclick="switchView('settings')" title="Impostazioni">WORKOUT</div>
     <div class="logo-sub">WORKOUT SYSTEM v2.1</div>
-    <div class="by-bandicoot">by BANDICOOT</div>
     <div class="day-badge" id="current-day-badge">LUNEDÌ</div>
   </div>
 
   <!-- WEEK SELECTOR -->
   <div class="week-scroll" id="week-scroll"></div>
 
-  <!-- ======================== WORKOUT VIEW ======================== -->
+  <!-- WORKOUT VIEW -->
   <div id="view-workout" class="view active">
     <div class="progress-wrap">
       <div class="progress-label">
@@ -38,7 +40,7 @@
     <div id="exercise-list"></div>
   </div>
 
-  <!-- ======================== TIMER VIEW ======================== -->
+  <!-- TIMER VIEW -->
   <div id="view-timer" class="view">
     <div class="section-title">// TIMER RIPOSO</div>
     <div class="timer-wrap">
@@ -59,13 +61,13 @@
     </div>
   </div>
 
-  <!-- ======================== CALENDAR VIEW ======================== -->
+  <!-- CALENDAR VIEW -->
   <div id="view-calendar" class="view">
     <div class="section-title">// CALENDARIO</div>
     <div class="calendar-nav">
-      <button class="cal-nav-btn" onclick="calPrev()">‹</button>
+      <button class="cal-nav-btn" onclick="calPrev()">&#8249;</button>
       <div class="cal-month-label" id="cal-month-label"></div>
-      <button class="cal-nav-btn" onclick="calNext()">›</button>
+      <button class="cal-nav-btn" onclick="calNext()">&#8250;</button>
     </div>
     <div class="cal-grid">
       <div class="cal-header-cell">LUN</div>
@@ -79,13 +81,13 @@
     </div>
     <div id="cal-detail" class="cal-detail"></div>
     <div style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.8;">
-      <span style="color:var(--pink);">■</span> Giorno obbligatorio &nbsp;
-      <span style="color:var(--cyan);">■</span> Giorno facoltativo &nbsp;
-      <span style="color:var(--yellow);">□</span> Oggi
+      <span style="color:var(--pink);">&#9632;</span> Obbligatorio &nbsp;
+      <span style="color:var(--cyan);">&#9632;</span> Facoltativo &nbsp;
+      <span style="color:var(--yellow);">&#9633;</span> Oggi
     </div>
   </div>
 
-  <!-- ======================== LOG VIEW ======================== -->
+  <!-- LOG VIEW -->
   <div id="view-log" class="view">
     <div class="section-title">// REGISTRA SESSIONE</div>
     <div class="session-panel">
@@ -98,7 +100,7 @@
       </div>
       <div class="session-row">
         <select class="session-input" id="log-location">
-          <option value="">📍 Dove ti sei allenato?</option>
+          <option value="">&#128205; Dove ti sei allenato?</option>
         </select>
       </div>
       <div class="session-row">
@@ -108,24 +110,22 @@
     </div>
   </div>
 
-  <!-- ======================== HISTORY VIEW ======================== -->
+  <!-- HISTORY VIEW -->
   <div id="view-history" class="view">
     <div class="section-title">// STORICO</div>
     <div id="history-list"></div>
   </div>
 
-  <!-- ======================== SETTINGS VIEW ======================== -->
+  <!-- SETTINGS VIEW -->
   <div id="view-settings" class="view">
-    <div class="section-title">// IMPOSTAZIONI</div>
+    <div class="section-title">// CONFIGURAZIONE</div>
 
-    <!-- Nome -->
     <div class="settings-panel">
       <label class="settings-label">NOME ATLETA</label>
       <input type="text" class="settings-input" id="settings-name" placeholder="Il tuo nome..." maxlength="20" />
       <button class="settings-btn" onclick="saveName()">SALVA NOME</button>
     </div>
 
-    <!-- Luoghi -->
     <div class="settings-panel">
       <label class="settings-label">LUOGHI DI ALLENAMENTO</label>
       <div class="location-list" id="location-list"></div>
@@ -135,7 +135,6 @@
       </div>
     </div>
 
-    <!-- Schede -->
     <div class="settings-panel">
       <label class="settings-label">SCHEDE ALLENAMENTO</label>
       <div id="schedule-list"></div>
@@ -145,35 +144,39 @@
         <button class="settings-btn" onclick="createCustomSchedule()">CREA SCHEDA</button>
       </div>
     </div>
-
   </div>
 
+</div>
+
+<!-- BY BANDICOOT FOOTER -->
+<div class="bandicoot-footer">
+  <span class="by-bandicoot">by BANDICOOT</span>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
   <div class="nav-item active" id="nav-workout" onclick="switchView('workout')">
-    <div class="nav-icon">🏋️</div>
+    <div class="nav-icon-txt">W</div>
     <div class="nav-label">WORKOUT</div>
   </div>
   <div class="nav-item" id="nav-timer" onclick="switchView('timer')">
-    <div class="nav-icon">⏱️</div>
+    <div class="nav-icon-txt">T</div>
     <div class="nav-label">TIMER</div>
   </div>
   <div class="nav-item" id="nav-calendar" onclick="switchView('calendar')">
-    <div class="nav-icon">📅</div>
+    <div class="nav-icon-txt">CAL</div>
     <div class="nav-label">CALENDARIO</div>
   </div>
   <div class="nav-item" id="nav-log" onclick="switchView('log')">
-    <div class="nav-icon">📝</div>
+    <div class="nav-icon-txt">LOG</div>
     <div class="nav-label">LOG</div>
   </div>
   <div class="nav-item" id="nav-history" onclick="switchView('history')">
-    <div class="nav-icon">📊</div>
+    <div class="nav-icon-txt">REC</div>
     <div class="nav-label">STORICO</div>
   </div>
   <div class="nav-item" id="nav-settings" onclick="switchView('settings')">
-    <div class="nav-icon">⚙️</div>
+    <div class="nav-icon-txt">CFG</div>
     <div class="nav-label">CONFIG</div>
   </div>
 </div>

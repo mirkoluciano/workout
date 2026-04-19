@@ -753,3 +753,57 @@ function createCustomSchedule() {
 // START
 // ============================================================
 window.addEventListener('DOMContentLoaded', init);
+
+// ============================================================
+// RETRO GRID — canvas-based, Safari compatible
+// ============================================================
+function drawRetroGrid() {
+  const canvas = document.getElementById('retro-grid');
+  if (!canvas) return;
+  const W = canvas.width = window.innerWidth;
+  const H = canvas.height = canvas.offsetHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, W, H);
+
+  const cols = 12;
+  const rows = 8;
+  const vp = { x: W / 2, y: 0 };
+
+  function project(gx, gy) {
+    const nx = (gx / cols) - 0.5;
+    const ny = gy / rows;
+    const px = vp.x + nx * W * (0.5 + ny * 1.5);
+    const py = ny * H;
+    return { x: px, y: py };
+  }
+
+  ctx.lineWidth = 0.8;
+
+  for (let r = 0; r <= rows; r++) {
+    const p0 = project(0, r);
+    const p1 = project(cols, r);
+    const alpha = 0.08 + (r / rows) * 0.25;
+    ctx.strokeStyle = `rgba(255,0,151,${alpha})`;
+    ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.stroke();
+  }
+
+  for (let c = 0; c <= cols; c++) {
+    const p0 = project(c, 0);
+    const p1 = project(c, rows);
+    const dx = Math.abs(c - cols/2) / (cols/2);
+    const alpha = 0.05 + (1 - dx) * 0.15;
+    ctx.strokeStyle = `rgba(255,0,151,${alpha})`;
+    ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.stroke();
+  }
+
+  // horizon glow
+  const grad = ctx.createLinearGradient(0, 0, 0, H * 0.3);
+  grad.addColorStop(0, 'rgba(255,0,151,0.15)');
+  grad.addColorStop(1, 'rgba(255,0,151,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H * 0.3);
+}
+
+window.addEventListener('resize', drawRetroGrid);
+// draw grid after init
+setTimeout(drawRetroGrid, 100);
